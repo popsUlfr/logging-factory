@@ -1,0 +1,27 @@
+{
+  "name": "logging-factory",
+  "version": "0.0.1",
+  "description": "A factory wrapping around tracer to facilitate handling of logging to a log file and replacing the standard 'console.XXX' print functions with those from tracer.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/popsUlfr/logging-factory.git"
+  },
+  "keywords": [
+    "log",
+    "logging",
+    "server",
+    "tracer",
+    "colors",
+    "console"
+  ],
+  "author": "Philipp Richter <richterphilipp.pops@gmail.com> (https://github.com/popsulfr)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/popsUlfr/logging-factory/issues"
+  },
+  "homepage": "https://github.com/popsUlfr/logging-factory#readme"
+}
