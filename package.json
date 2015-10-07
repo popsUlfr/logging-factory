@@ -23,5 +23,9 @@
   "bugs": {
     "url": "https://github.com/popsUlfr/logging-factory/issues"
   },
-  "homepage": "https://github.com/popsUlfr/logging-factory#readme"
+  "homepage": "https://github.com/popsUlfr/logging-factory#readme",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "tracer": "^0.8.0"
+  }
 }
