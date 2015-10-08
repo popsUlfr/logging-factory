@@ -2,11 +2,13 @@
  * Created by Philipp Richter on 07/10/15.
  *
  * Usage:
- * require('logging-factory')({level:'info',color:true,file:'logfile'})
+ * var LF = require('logging-factory')({level:'info',color:true,file:'logfile'})
  *
  * level : a log level compatible with tracer -> [ 'log', 'trace', 'debug', 'info', 'warn', 'error' ]
  * color : boolean to set of you want colors (colors are removed from lines outputted to a log file)
  * file : a file to log to
+ *
+ * Returns an object with a close function in case the process handlers are not getting called
  */
 
 function toBoolean (value) {
@@ -48,17 +50,23 @@ module.exports = function (options) {
 	};
 	var color = toBoolean(options.color);
 	var file = getFile(options.file);
+	var ret = {
+		close: function () {}
+	};
 	if (file) {
 		var fs = require('fs');
 		var colors = require('colors/safe');
 		try {
 			var fd = fs.openSync(file,'a',0600);
 			var exitHandler = function (exit, err) {
-				process.stderr.write('[#] LOGGER closing file : ' + file + '\n');
-				try {
-					fs.closeSync(fd);
+				if (fd) {
+					process.stderr.write('[#] LOGGER closing file : ' + file + '\n');
+					try {
+						fs.closeSync(fd);
+						fd = undefined;
+					}
+					catch (err) {}
 				}
-				catch (err) {}
 				if (exit) process.exit();
 			}
 			process.on('exit',exitHandler.bind(null,false));
@@ -66,6 +74,7 @@ module.exports = function (options) {
 			process.on('SIGTERM',exitHandler.bind(null,true));
 			process.on('SIGHUP',exitHandler.bind(null,true));
 			process.on('uncaughtException', exitHandler.bind(null, true));
+			ret.close = exitHandler.bind(null,false);
 			process.stderr.write('[#] LOGGER writing to file : ' + file + '\n');
 			tracerOptions.transport = function (data) {
 				defaultTransport(data);
@@ -92,4 +101,5 @@ module.exports = function (options) {
 	global.console.warn = global.LOGGER.warn;
 	global.console.error = global.LOGGER.error;
 	global.console.debug = global.LOGGER.debug;
+	return ret;
 };
