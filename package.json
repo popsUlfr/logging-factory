@@ -1,6 +1,6 @@
 {
   "name": "logging-factory",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A factory wrapping around tracer to facilitate handling of logging to a log file and replacing the standard 'console.XXX' print functions with those from tracer.",
   "main": "index.js",
   "scripts": {
