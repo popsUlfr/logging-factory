@@ -28,6 +28,7 @@ They are also accessible through global variable 'LOGGER'
 ## Release History
 -----
 
+* 0.0.5 Comment UncaughtException handling since it causes problems with servers like total.js 
 * 0.0.4 Add filemode option and set console.log to tracer.log
 * 0.0.2 Add close handler
 * 0.0.1 Initial Release

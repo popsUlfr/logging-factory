@@ -76,7 +76,7 @@ module.exports = function (options) {
 			process.on('SIGINT',exitHandler.bind(null,true));
 			process.on('SIGTERM',exitHandler.bind(null,true));
 			process.on('SIGHUP',exitHandler.bind(null,true));
-			process.on('uncaughtException', exitHandler.bind(null, true));
+			//process.on('uncaughtException', exitHandler.bind(null, true));
 			ret.close = exitHandler.bind(null,false);
 			process.stderr.write('[#] LOGGER writing to file : ' + file + '\n');
 			tracerOptions.transport = function (data) {
